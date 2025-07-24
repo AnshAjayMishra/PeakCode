@@ -7,9 +7,9 @@ import { ModeToggle } from '../darkmode/toggle'
   
 
 const menuItems = [
-    { name: 'Features', href: '#link' },
+    { name: 'Roadmap', href: '#link' },
     { name: 'Solution', href: '#link' },
-    { name: 'Pricing', href: '#link' },
+    { name: 'Resources', href: '#link' },
     { name: 'About', href: '#link' },
 ]
 
