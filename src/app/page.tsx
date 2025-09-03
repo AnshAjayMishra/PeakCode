@@ -8,6 +8,8 @@ function page() {
       <HeroSection/>
       <FeaturesSectionWithHoverEffects/>
     </div>
+
+
   )
 }
 
