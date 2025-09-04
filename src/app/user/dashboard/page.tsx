@@ -8,10 +8,12 @@ import { UserButton } from "@clerk/nextjs";
 import { ModeToggle } from "@/components/darkmode/toggle";
 import Image from "next/image";
 
+type Difficulty = "Easy" | "Medium" | "Hard";
+
 type Question = {
   id: number;
   title: string;
-  difficulty: "Easy" | "Medium" | "Hard"; // ✅ fixed type
+  difficulty: Difficulty;
   link: string;
   topics: string[];
   companies: string[];
@@ -22,24 +24,27 @@ type TopicData = {
   [topic: string]: Question[];
 };
 
-type SheetKey = 'A2Z' | 'SDE' | 'Blind75' | 'LC150';
+export type SheetKey = "A2Z" | "SDE" | "Blind75" | "LC150";
 
 const TOPICS_PER_PAGE = 8;
 
 export default function DashboardPage() {
   const [topics, setTopics] = useState<TopicData>({});
-  const [loading, setLoading] = useState(true);
-  const [selectedSheet, setSelectedSheet] = useState<SheetKey>('LC150');
-  const [currentPage, setCurrentPage] = useState(1);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [selectedSheet, setSelectedSheet] = useState<SheetKey>("LC150");
+  const [currentPage, setCurrentPage] = useState<number>(1);
 
   useEffect(() => {
     setLoading(true);
     fetch(`/api/leetcode-questions?sheet=${selectedSheet}`)
-      .then(res => res.json())
+      .then((res) => res.json())
       .then((data) => {
         const processed: TopicData = {};
         for (const topic in data) {
-          processed[topic] = data[topic].map((q: Question) => ({ ...q, completed: false }));
+          processed[topic] = data[topic].map((q: Question) => ({
+            ...q,
+            completed: false,
+          }));
         }
         setTopics(processed);
         setLoading(false);
@@ -48,9 +53,9 @@ export default function DashboardPage() {
   }, [selectedSheet]);
 
   const toggleCompleted = (topic: string, id: number) => {
-    setTopics(prev => ({
+    setTopics((prev) => ({
       ...prev,
-      [topic]: prev[topic].map(q =>
+      [topic]: prev[topic].map((q) =>
         q.id === id ? { ...q, completed: !q.completed } : q
       ),
     }));
@@ -58,10 +63,10 @@ export default function DashboardPage() {
 
   const all = Object.values(topics).flat();
   const total = all.length;
-  const solved = all.filter(q => q.completed).length;
-  const easy = all.filter(q => q.difficulty === "Easy");
-  const medium = all.filter(q => q.difficulty === "Medium");
-  const hard = all.filter(q => q.difficulty === "Hard");
+  const solved = all.filter((q) => q.completed).length;
+  const easy = all.filter((q) => q.difficulty === "Easy");
+  const medium = all.filter((q) => q.difficulty === "Medium");
+  const hard = all.filter((q) => q.difficulty === "Hard");
 
   const topicEntries = Object.entries(topics);
   const totalPages = Math.ceil(topicEntries.length / TOPICS_PER_PAGE);
@@ -72,7 +77,10 @@ export default function DashboardPage() {
 
   return (
     <div className="flex h-screen overflow-hidden bg-background text-foreground">
-      <Sidebar selected={selectedSheet} onSelect={(sheet) => setSelectedSheet(sheet)} /> {/* ✅ fixed here */}
+      <Sidebar
+        selected={selectedSheet}
+        onSelect={(sheet: SheetKey) => setSelectedSheet(sheet)} 
+      />
 
       <div className="flex-1 flex flex-col overflow-hidden">
         {/* Top Bar */}
@@ -101,9 +109,18 @@ export default function DashboardPage() {
           {/* Stats */}
           <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             <StatCard label="Total Progress" value={`${solved} / ${total}`} />
-            <StatCard label="Easy" value={`${easy.filter(q => q.completed).length} / ${easy.length}`} />
-            <StatCard label="Medium" value={`${medium.filter(q => q.completed).length} / ${medium.length}`} />
-            <StatCard label="Hard" value={`${hard.filter(q => q.completed).length} / ${hard.length}`} />
+            <StatCard
+              label="Easy"
+              value={`${easy.filter((q) => q.completed).length} / ${easy.length}`}
+            />
+            <StatCard
+              label="Medium"
+              value={`${medium.filter((q) => q.completed).length} / ${medium.length}`}
+            />
+            <StatCard
+              label="Hard"
+              value={`${hard.filter((q) => q.completed).length} / ${hard.length}`}
+            />
           </section>
 
           {/* Accordions */}
@@ -127,7 +144,7 @@ export default function DashboardPage() {
           {totalPages > 1 && (
             <div className="flex justify-center items-center pt-6 space-x-6">
               <button
-                onClick={() => setCurrentPage(p => Math.max(p - 1, 1))}
+                onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
                 disabled={currentPage === 1}
                 className="p-2 rounded-full border border-border hover:bg-muted disabled:opacity-40"
               >
@@ -137,7 +154,7 @@ export default function DashboardPage() {
                 Page {currentPage} of {totalPages}
               </span>
               <button
-                onClick={() => setCurrentPage(p => Math.min(p + 1, totalPages))}
+                onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPages))}
                 disabled={currentPage === totalPages}
                 className="p-2 rounded-full border border-border hover:bg-muted disabled:opacity-40"
               >
