@@ -1,5 +1,6 @@
 'use client';
 
+import React from 'react'; 
 import { useState } from 'react';
 import {
   ChevronLeft,
@@ -17,15 +18,14 @@ type Props = {
 export function Sidebar({ selected, onSelect }: Props) {
   const [collapsed, setCollapsed] = useState(false);
 
-  const sheets: { key: SheetKey; label: string; icon: JSX.Element }[] = [
+  const sheets: { key: SheetKey; label: string; icon: React.ReactNode }[] = [ 
     { key: 'LC150', label: 'LeetCode 150', icon: <BringToFront size={16} /> },
     { key: 'A2Z', label: 'Striver A2Z DSA Sheet', icon: <BringToFront size={16} /> },
     { key: 'SDE', label: 'NeetCode 150', icon: <BringToFront size={16} /> },
     { key: 'Blind75', label: 'Blind 75 Sheet', icon: <BringToFront size={16} /> },
     { key: 'Love', label: 'Love Babbar Sheet', icon: <BringToFront size={16} /> },
   ];
- 
-   
+
   return (
     <div
       className={`relative h-screen transition-all duration-300 ease-in-out ${
@@ -58,19 +58,12 @@ export function Sidebar({ selected, onSelect }: Props) {
                       : 'hover:bg-white/5'
                   }`}
                 >
-                  {/* Left white border for active item */}
                   {isActive && (
                     <span className="absolute left-0 top-0 h-full w-1 bg-white rounded-r-sm" />
                   )}
-
-                  {/* Icon */}
                   <span className="mr-3">{icon}</span>
-
-                  {/* Label (hide when collapsed) */}
                   {!collapsed && (
-                    <span className="text-sm font-medium truncate">
-                      {label}
-                    </span>
+                    <span className="text-sm font-medium truncate">{label}</span>
                   )}
                 </button>
               </li>
