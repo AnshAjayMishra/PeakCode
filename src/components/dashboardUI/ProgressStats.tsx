@@ -1,12 +1,30 @@
 import { Progress } from "@/components/ui/progress";
 import { Card, CardContent } from "@/components/ui/card";
 
-export function ProgressStats({ easy, medium, hard, }: any) {
-  const renderStat = (label: string, solved: number, total: number, color: string) => (
+type Stat = {
+  solved: number;
+  total: number;
+};
+
+type ProgressStatsProps = {
+  easy: Stat;
+  medium: Stat;
+  hard: Stat;
+};
+
+export function ProgressStats({ easy, medium, hard }: ProgressStatsProps) {
+  const renderStat = (
+    label: string,
+    solved: number,
+    total: number,
+    color: string
+  ) => (
     <div>
       <h3 className="text-sm font-medium">{label}</h3>
       <Progress value={(solved / total) * 100} className={`bg-${color}-500`} />
-      <p className="text-xs mt-1">{solved} / {total}</p>
+      <p className="text-xs mt-1">
+        {solved} / {total}
+      </p>
     </div>
   );
 

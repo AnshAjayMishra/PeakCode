@@ -10,11 +10,10 @@ import { Progress } from "@/components/ui/progress";
 import { Checkbox } from "@/components/ui/checkbox";
 import { CheckCircle, ExternalLink } from "lucide-react";
 
-
 type Question = {
   id: number;
   title: string;
-  difficulty: string;
+  difficulty: "Easy" | "Medium" | "Hard"; // ✅ fixed type
   link: string;
   completed?: boolean;
 };
@@ -83,7 +82,7 @@ export function AccordionSection({ title, questions, onToggle, topicKey }: Props
   );
 }
 
-function getDifficultyColor(level: string) {
+function getDifficultyColor(level: "Easy" | "Medium" | "Hard") {
   return level === "Easy"
     ? "text-green-500"
     : level === "Medium"

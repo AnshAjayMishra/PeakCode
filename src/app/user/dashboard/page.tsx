@@ -82,6 +82,9 @@ export default function DashboardPage() {
               src="/peakcode.png"
               alt="PeakCode Logo"
               className="h-12 w-12 object-contain rounded-full"
+              width={22}
+              height={22}
+             
             />
           </div>
 
