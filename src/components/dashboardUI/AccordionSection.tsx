@@ -9,7 +9,7 @@ import {
 import { Progress } from "@/components/ui/progress";
 import { Checkbox } from "@/components/ui/checkbox";
 import { CheckCircle, ExternalLink } from "lucide-react";
-import { useState } from "react";
+
 
 type Question = {
   id: number;
