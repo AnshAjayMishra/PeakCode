@@ -11,7 +11,7 @@ import Image from "next/image";
 type Question = {
   id: number;
   title: string;
-  difficulty: string;
+  difficulty: "Easy" | "Medium" | "Hard"; // ✅ fixed type
   link: string;
   topics: string[];
   companies: string[];
@@ -72,7 +72,7 @@ export default function DashboardPage() {
 
   return (
     <div className="flex h-screen overflow-hidden bg-background text-foreground">
-      <Sidebar selected={selectedSheet} onSelect={setSelectedSheet} />
+      <Sidebar selected={selectedSheet} onSelect={(sheet) => setSelectedSheet(sheet)} /> {/* ✅ fixed here */}
 
       <div className="flex-1 flex flex-col overflow-hidden">
         {/* Top Bar */}
@@ -84,7 +84,6 @@ export default function DashboardPage() {
               className="h-12 w-12 object-contain rounded-full"
               width={22}
               height={22}
-             
             />
           </div>
 
