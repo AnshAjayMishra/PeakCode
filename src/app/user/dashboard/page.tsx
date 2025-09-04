@@ -22,7 +22,7 @@ type TopicData = {
   [topic: string]: Question[];
 };
 
-type SheetKey = 'A2Z' | 'SDE' | 'Blind75';
+type SheetKey = 'A2Z' | 'SDE' | 'Blind75' | 'LC150';
 
 const TOPICS_PER_PAGE = 8;
 
