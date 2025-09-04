@@ -7,6 +7,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { UserButton } from "@clerk/nextjs";
 import { ModeToggle } from "@/components/darkmode/toggle";
 import Image from "next/image";
+import { SheetKey } from "@/types/sheet"; // ✅ shared type
 
 type Difficulty = "Easy" | "Medium" | "Hard";
 
@@ -23,8 +24,6 @@ type Question = {
 type TopicData = {
   [topic: string]: Question[];
 };
-
-export type SheetKey = "A2Z" | "SDE" | "Blind75" | "LC150";
 
 const TOPICS_PER_PAGE = 8;
 
@@ -79,7 +78,7 @@ export default function DashboardPage() {
     <div className="flex h-screen overflow-hidden bg-background text-foreground">
       <Sidebar
         selected={selectedSheet}
-        onSelect={(sheet: SheetKey) => setSelectedSheet(sheet)} 
+        onSelect={(sheet) => setSelectedSheet(sheet)} // ✅ No type error now
       />
 
       <div className="flex-1 flex flex-col overflow-hidden">
