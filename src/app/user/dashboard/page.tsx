@@ -6,6 +6,7 @@ import { Sidebar } from "@/components/dashboardUI/Sidebar";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { UserButton } from "@clerk/nextjs";
 import { ModeToggle } from "@/components/darkmode/toggle";
+import Image from "next/image";
 
 type Question = {
   id: number;
@@ -77,7 +78,7 @@ export default function DashboardPage() {
         {/* Top Bar */}
         <div className="pt-6 pb-4 px-4 bg-background flex items-center justify-between border-b border-muted">
           <div className="flex items-center space-x-4">
-            <img
+            <Image
               src="/peakcode.png"
               alt="PeakCode Logo"
               className="h-12 w-12 object-contain rounded-full"

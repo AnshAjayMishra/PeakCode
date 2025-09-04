@@ -1,7 +1,7 @@
 import { Progress } from "@/components/ui/progress";
 import { Card, CardContent } from "@/components/ui/card";
 
-export function ProgressStats({ easy, medium, hard, total }: any) {
+export function ProgressStats({ easy, medium, hard, }: any) {
   const renderStat = (label: string, solved: number, total: number, color: string) => (
     <div>
       <h3 className="text-sm font-medium">{label}</h3>

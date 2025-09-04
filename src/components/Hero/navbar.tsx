@@ -7,6 +7,7 @@ import { cn } from '@/lib/utils';
 import Link from 'next/link';
 import { ModeToggle } from '../darkmode/toggle';
 import { SignInButton, SignUpButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs';
+import Image from 'next/image';
 
 const menuItems = [
   { name: 'Roadmap', href: '#link' },
@@ -135,7 +136,7 @@ const Logo = ({ className }: { className?: string }) => {
   return (
     <div className={cn('flex items-center space-x-3', className)}>
       <div className="w-8 h-8 text-white rounded-lg flex items-center justify-center">
-        <img src="/peakcode.png" alt="PeakCode Logo" className="w-6 h-6 object-contain" />
+        <Image src="/peakcode.png" alt="PeakCode Logo" className="w-6 h-6 object-contain" />
         <span className="text-white font-bold text-sm hidden">P</span>
       </div>
       <span className="text-xl font-semibold dark:text-white text-black bg-clip-text">
