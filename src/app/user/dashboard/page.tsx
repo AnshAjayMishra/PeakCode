@@ -7,7 +7,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { UserButton } from "@clerk/nextjs";
 import { ModeToggle } from "@/components/darkmode/toggle";
 import Image from "next/image";
-import { SheetKey } from "@/types/sheet"; // ✅ shared type
+import { SheetKey } from "@/types/sheet";
 
 type Difficulty = "Easy" | "Medium" | "Hard";
 
@@ -75,57 +75,49 @@ export default function DashboardPage() {
   );
 
   return (
-    <div className="flex h-screen overflow-hidden bg-background text-foreground">
-      <Sidebar
-        selected={selectedSheet}
-        onSelect={(sheet) => setSelectedSheet(sheet)} // ✅ No type error now
-      />
+    <div className="flex h-screen bg-background text-foreground overflow-hidden">
+      {/* Sidebar */}
+      <div className="hidden md:block">
+        <Sidebar selected={selectedSheet} onSelect={setSelectedSheet} />
+      </div>
 
+      {/* Main Content */}
       <div className="flex-1 flex flex-col overflow-hidden">
         {/* Top Bar */}
-        <div className="pt-6 pb-4 px-4 bg-background flex items-center justify-between border-b border-muted">
-          <div className="flex items-center space-x-4">
+        <div className="pt-4 pb-4 px-4 bg-background flex items-center justify-between border-b border-muted">
+          <div className="flex items-center gap-3">
             <Image
               src="/peakcode.png"
               alt="PeakCode Logo"
-              className="h-12 w-12 object-contain rounded-full"
-              width={22}
-              height={22}
+              className="h-10 w-10 object-contain rounded-full"
+              width={40}
+              height={40}
             />
-          </div>
-
-          <div className="flex items-center space-x-4">
-            <h1 className="text-2xl font-semibold tracking-wide whitespace-nowrap">
+            <h1 className="text-lg sm:text-2xl font-semibold tracking-wide whitespace-nowrap">
               LeetCode Top 150
             </h1>
+          </div>
+
+          <div className="flex items-center gap-3">
             <ModeToggle />
             <UserButton afterSignOutUrl="/" />
           </div>
         </div>
 
-        {/* Main Content */}
-        <main className="flex-1 overflow-y-auto px-6 pb-6 space-y-6">
+        {/* Main */}
+        <main className="flex-1 overflow-y-auto px-4 sm:px-6 pb-6 space-y-6">
           {/* Stats */}
           <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             <StatCard label="Total Progress" value={`${solved} / ${total}`} />
-            <StatCard
-              label="Easy"
-              value={`${easy.filter((q) => q.completed).length} / ${easy.length}`}
-            />
-            <StatCard
-              label="Medium"
-              value={`${medium.filter((q) => q.completed).length} / ${medium.length}`}
-            />
-            <StatCard
-              label="Hard"
-              value={`${hard.filter((q) => q.completed).length} / ${hard.length}`}
-            />
+            <StatCard label="Easy" value={`${easy.filter(q => q.completed).length} / ${easy.length}`} />
+            <StatCard label="Medium" value={`${medium.filter(q => q.completed).length} / ${medium.length}`} />
+            <StatCard label="Hard" value={`${hard.filter(q => q.completed).length} / ${hard.length}`} />
           </section>
 
-          {/* Accordions */}
+          {/* Accordion Topics */}
           <section className="space-y-4">
             {loading ? (
-              <p>Loading questions...</p>
+              <p className="text-center">Loading questions...</p>
             ) : (
               currentTopics.map(([topic, questions]) => (
                 <AccordionSection
@@ -141,7 +133,7 @@ export default function DashboardPage() {
 
           {/* Pagination */}
           {totalPages > 1 && (
-            <div className="flex justify-center items-center pt-6 space-x-6">
+            <div className="flex justify-center items-center pt-6 gap-6">
               <button
                 onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
                 disabled={currentPage === 1}
