@@ -28,7 +28,7 @@ const TOPICS_PER_PAGE = 8;
 export default function DashboardPage() {
   const [topics, setTopics] = useState<TopicData>({});
   const [loading, setLoading] = useState(true);
-  const [selectedSheet, setSelectedSheet] = useState<SheetKey>('A2Z');
+  const [selectedSheet, setSelectedSheet] = useState<SheetKey>('LC150');
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {

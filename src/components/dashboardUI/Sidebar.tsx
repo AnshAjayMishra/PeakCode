@@ -4,11 +4,7 @@ import { useState } from 'react';
 import {
   ChevronLeft,
   ChevronRight,
-  BookOpen,
-  NotebookPen,
-  Brain,
-  ListChecks,
-  BookmarkCheck,
+  BringToFront,
 } from 'lucide-react';
 
 type SheetKey = 'LC150' | 'A2Z' | 'SDE' | 'Blind75' | 'Love';
@@ -22,13 +18,14 @@ export function Sidebar({ selected, onSelect }: Props) {
   const [collapsed, setCollapsed] = useState(false);
 
   const sheets: { key: SheetKey; label: string; icon: JSX.Element }[] = [
-    { key: 'LC150', label: 'LeetCode 150', icon: <BookOpen size={18} /> },
-    { key: 'A2Z', label: 'Striver A2Z DSA Sheet', icon: <NotebookPen size={18} /> },
-    { key: 'SDE', label: 'NeetCode 150', icon: <Brain size={18} /> },
-    { key: 'Blind75', label: 'Blind 75 Sheet', icon: <ListChecks size={18} /> },
-    { key: 'Love', label: 'Love Babbar Sheet', icon: <BookmarkCheck size={18} /> },
+    { key: 'LC150', label: 'LeetCode 150', icon: <BringToFront size={16} /> },
+    { key: 'A2Z', label: 'Striver A2Z DSA Sheet', icon: <BringToFront size={16} /> },
+    { key: 'SDE', label: 'NeetCode 150', icon: <BringToFront size={16} /> },
+    { key: 'Blind75', label: 'Blind 75 Sheet', icon: <BringToFront size={16} /> },
+    { key: 'Love', label: 'Love Babbar Sheet', icon: <BringToFront size={16} /> },
   ];
-
+ 
+   
   return (
     <div
       className={`relative h-screen transition-all duration-300 ease-in-out ${
@@ -46,6 +43,7 @@ export function Sidebar({ selected, onSelect }: Props) {
       {/* Sheet Menu */}
       <div className="p-4 text-white">
         {!collapsed && <h2 className="text-lg font-bold mb-4">DSA Sheets</h2>}
+
         <ul className="space-y-2">
           {sheets.map(({ key, label, icon }) => {
             const isActive = selected === key;
@@ -53,6 +51,7 @@ export function Sidebar({ selected, onSelect }: Props) {
               <li key={key}>
                 <button
                   onClick={() => onSelect(key)}
+                  aria-current={isActive ? 'page' : undefined}
                   className={`group flex items-center w-full px-3 py-2 rounded-md text-left transition-colors relative ${
                     isActive
                       ? 'bg-white/10 font-semibold'

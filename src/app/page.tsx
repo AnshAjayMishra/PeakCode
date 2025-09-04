@@ -6,7 +6,7 @@ function page() {
   return (
     <div>
       <HeroSection/>
-      <FeaturesSectionWithHoverEffects/>
+      {/* <FeaturesSectionWithHoverEffects/> */}
     </div>
 
 
