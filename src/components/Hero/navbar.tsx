@@ -39,6 +39,7 @@ const Navbar = () => {
           )}
         >
           <div className="relative flex flex-wrap items-center justify-between gap-6 py-3 lg:gap-0 lg:py-4">
+            {/* Logo + Menu Toggle */}
             <div className="flex w-full justify-between lg:w-auto">
               <Link href="/" aria-label="home" className="flex items-center space-x-2">
                 <Logo />
@@ -54,6 +55,7 @@ const Navbar = () => {
               </button>
             </div>
 
+            {/* Desktop Nav */}
             <div className="absolute inset-0 m-auto hidden size-fit lg:block">
               <ul className="flex gap-8 text-sm">
                 {menuItems.map((item, index) => (
@@ -69,9 +71,11 @@ const Navbar = () => {
               </ul>
             </div>
 
-            <div className="bg-background group-data-[state=active]:block lg:group-data-[state=active]:flex mb-6 hidden w-full flex-wrap items-center justify-end space-y-8 rounded-3xl border p-6 shadow-2xl shadow-zinc-300/20 md:flex-nowrap lg:m-0 lg:flex lg:w-fit lg:gap-6 lg:space-y-0 lg:border-transparent lg:bg-transparent lg:p-0 lg:shadow-none dark:shadow-none dark:lg:bg-transparent">
-              <div className="lg:hidden">
-                <ul className="space-y-6 text-base">
+            {/* Dropdown - Mobile and Desktop Buttons */}
+            <div className="bg-background group-data-[state=active]:block lg:group-data-[state=active]:flex mb-4 hidden w-full max-w-sm mx-auto rounded-2xl border p-4 shadow-xl shadow-zinc-300/10 flex-col items-center space-y-6 lg:m-0 lg:flex lg:w-fit lg:flex-row lg:space-y-0 lg:gap-6 lg:border-transparent lg:bg-transparent lg:p-0 lg:shadow-none dark:shadow-none dark:lg:bg-transparent">
+              {/* Mobile Nav Items */}
+              <div className="lg:hidden w-full">
+                <ul className="space-y-4 text-base text-center">
                   {menuItems.map((item, index) => (
                     <li key={index}>
                       <Link
@@ -85,6 +89,7 @@ const Navbar = () => {
                 </ul>
               </div>
 
+              {/* Auth Buttons + ModeToggle */}
               <div className="flex w-full flex-col space-y-3 sm:flex-row sm:gap-3 sm:space-y-0 md:w-fit items-center">
                 <ModeToggle />
 
@@ -101,10 +106,7 @@ const Navbar = () => {
                   </SignInButton>
 
                   <SignUpButton mode="modal">
-                    <Button
-                      size="sm"
-                      className={cn(isScrolled && 'lg:hidden')}
-                    >
+                    <Button size="sm" className={cn(isScrolled && 'lg:hidden')}>
                       Sign Up
                     </Button>
                   </SignUpButton>
@@ -136,13 +138,18 @@ const Logo = ({ className }: { className?: string }) => {
   return (
     <div className={cn('flex items-center space-x-3', className)}>
       <div className="w-8 h-8 text-white rounded-lg flex items-center justify-center">
-        <Image src="/peakcode.png" alt="PeakCode Logo" width={16} height={16} className="w-6 h-6 object-contain" />
+        <Image
+          src="/peakcode.png"
+          alt="PeakCode Logo"
+          width={16}
+          height={16}
+          className="w-6 h-6 object-contain"
+        />
         <span className="text-white font-bold text-sm hidden">P</span>
       </div>
       <span className="text-xl font-semibold dark:text-white text-black bg-clip-text">
-  PeakCode
-</span>
-
+        PeakCode
+      </span>
     </div>
   );
 };

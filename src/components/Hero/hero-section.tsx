@@ -178,42 +178,46 @@ export function HeroSection() {
                         </div>
 
                         <AnimatedGroup
-                            variants={{
-                                container: {
-                                    ...transitionVariants.container,
-                                    visible: {
-                                        ...transitionVariants.container.visible,
-                                        transition: {
-                                            staggerChildren: 0.05,
-                                            delayChildren: 0.75,
-                                        },
-                                    },
-                                },
-                                item: transitionVariants.item,
-                            }}>
-                            <div className="relative -mr-56 mt-8 overflow-hidden px-2 sm:mr-0 sm:mt-12 md:mt-20">
-                                <div
-                                    aria-hidden
-                                    className="bg-gradient-to-b to-background absolute inset-0 z-10 from-transparent from-35%"
-                                    />
-                                <div className="inset-shadow-2xs ring-background dark:inset-shadow-white/20 bg-background relative mx-auto max-w-6xl overflow-hidden rounded-2xl border p-4 shadow-lg shadow-zinc-950/15 ring-1">
-                                    <Image
-                                        className="bg-background aspect-15/8 relative hidden rounded-2xl dark:block"
-                                        src="/dashboard.png"
-                                        alt="app screen"
-                                        width={2700}
-                                        height={1440}
-                                        />
-                                    <Image
-                                        className="z-2 border-border/25 aspect-15/8 relative rounded-2xl border dark:hidden"
-                                        src="/dashboardw.png"
-                                        alt="app screen"
-                                        width={2700}
-                                        height={1440}
-                                        />
-                                </div>
-                            </div>
-                        </AnimatedGroup>
+  variants={{
+    container: {
+      ...transitionVariants.container,
+      visible: {
+        ...transitionVariants.container.visible,
+        transition: {
+          staggerChildren: 0.05,
+          delayChildren: 0.75,
+        },
+      },
+    },
+    item: transitionVariants.item,
+  }}
+>
+  <div className="relative mt-8 sm:mt-12 md:mt-20 px-2 sm:px-4 lg:px-8">
+    <div
+      aria-hidden
+      className="bg-gradient-to-b to-background absolute inset-0 z-10 from-transparent from-35%"
+    />
+    <div className="inset-shadow-2xs ring-background dark:inset-shadow-white/20 bg-background relative mx-auto w-full max-w-6xl overflow-hidden rounded-2xl border p-2 sm:p-4 shadow-lg shadow-zinc-950/15 ring-1">
+      {/* Dark Mode Image */}
+      <Image
+        className="hidden dark:block w-full h-auto rounded-2xl"
+        src="/dashboard.png"
+        alt="app screen"
+        width={2700}
+        height={1440}
+      />
+      {/* Light Mode Image */}
+      <Image
+        className="block dark:hidden w-full h-auto border border-border/25 rounded-2xl"
+        src="/dashboardw.png"
+        alt="app screen"
+        width={2700}
+        height={1440}
+      />
+    </div>
+  </div>
+</AnimatedGroup>
+
                     </div>
                 </section>
                 
